@@ -1,4 +1,7 @@
+import { RoutesWithNotFound } from '@/helpers'
+
 const App = () => {
-  return <div className='container'>App</div>
+  return <RoutesWithNotFound></RoutesWithNotFound>
 }
+
 export default App
