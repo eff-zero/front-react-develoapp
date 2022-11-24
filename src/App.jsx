@@ -1,5 +1,3 @@
-import { RoutesWithNotFound } from '@/helpers'
-
 import { Route } from 'react-router-dom'
 import { RoutesWithNotFound } from '@/helpers'
 import { HomePage, LoginPage } from '@/pages'
@@ -19,6 +17,5 @@ const App = () => {
     </RoutesWithNotFound>
   )
 }
-
 
 export default App

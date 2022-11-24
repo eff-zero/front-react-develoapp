@@ -1,16 +1,14 @@
 import useFetch from '@/hooks/useFetch'
 import { setNewData } from '@/redux/features/data/dataSlice'
 import { useDataState } from '@/redux/store'
+import { Col } from 'react-bootstrap'
 import { Category } from '..'
-
 
 const ListCategory = () => {
   const { error, isLoading } = useFetch('category', setNewData)
   const data = useDataState()
 
-  const activateCategories = data.filter(
-    (category) => category.state === 1,
-  )
+  const activateCategories = data.filter((category) => category.state === 1)
 
   return (
     <>

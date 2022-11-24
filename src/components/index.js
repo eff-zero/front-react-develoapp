@@ -1,4 +1,6 @@
 export { default as ErrorText } from './ErrorText';
+export { default as CategoryForm } from './forms/CategoryForm';
+export { default as CustomModal } from './modal/CustomModal';
 export { default as Dropdown } from './nav/Dropdown';
 export { default as Navbar } from './nav/Navbar';
 export { default as Category } from './products/Category';
