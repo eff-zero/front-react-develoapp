@@ -8,7 +8,7 @@ const store = configureStore({
   },
 })
 
-const useAuthSlice = () => useSelector((store) => store.auth)
+const useAuthState = () => useSelector((store) => store.auth)
 
-export { useAuthSlice }
+export { useAuthState }
 export default store
