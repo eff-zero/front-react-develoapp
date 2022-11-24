@@ -1,5 +1,5 @@
 import { ErrorText } from '@/components'
-import { doLogoutClient, doClientLogin } from '@/redux/features/auth/authSlice'
+import { doLogoutClient, doLoginClient } from '@/redux/features/auth/authSlice'
 import { login, logout } from '@/services/loginServices'
 import { useState, useRef } from 'react'
 import { FloatingLabel, Button, Form, Card, Container } from 'react-bootstrap'
@@ -12,8 +12,8 @@ const styles = {
 }
 
 const LoginPage = () => {
-  const dispatch = useDispatch()
   const [error, setError] = useState(null)
+  const dispatch = useDispatch()
 
   const emailRef = useRef()
   const passwordRef = useRef()
@@ -29,12 +29,14 @@ const LoginPage = () => {
     try {
       const response = await login(form)
       const data = response.data
-      dispatch(doClientLogin(data))
+      dispatch(doLoginClient(data))
     } catch (errorByServer) {
-      const isErrorConection = errorByServer?.message
-      isErrorConection
-        ? setError(isErrorConection)
-        : setError(errorByServer?.response?.data?.errors)
+      // Mejorar
+      console.log(errorByServer)
+      const typeError = errorByServer?.response?.data
+      typeError?.errors
+        ? setError(typeError?.errors) // Errores por campos en DB (validation Laravel)
+        : setError(typeError) // Error general, mesanje
     }
   }
 
@@ -77,6 +79,7 @@ const LoginPage = () => {
                 ref={passwordRef}
               />
               {error?.password && <ErrorText message={error.password[0]} />}
+              {error?.message && <ErrorText message={error.message} />}
             </FloatingLabel>
 
             <Container>
@@ -90,4 +93,5 @@ const LoginPage = () => {
     </Container>
   )
 }
+
 export default LoginPage

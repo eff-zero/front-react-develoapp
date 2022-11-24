@@ -12,7 +12,7 @@ const authSlice = createSlice({
   initialState: checkLocalStorage(),
   name: 'authSlice',
   reducers: {
-    doClientLogin: (state, action) => {
+    doLoginClient: (state, action) => {
       let authData = action.payload
       localStorage.setItem(keyLocalStorage, JSON.stringify(authData))
       return checkLocalStorage()
@@ -24,5 +24,5 @@ const authSlice = createSlice({
   },
 })
 
-export const { doClientLogin, doLogoutClient } = authSlice.actions
+export const { doLoginClient, doLogoutClient } = authSlice.actions
 export default authSlice.reducer

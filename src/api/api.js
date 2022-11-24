@@ -1,4 +1,4 @@
-import { keyLocalStorage } from '@/env'
+import { keyLocalStorage, baseURL } from '@/env'
 import axios from 'axios'
 
 const getToken = () => {
@@ -6,14 +6,12 @@ const getToken = () => {
   return JSON.parse(srtLocalStorage)?.auth_token || ''
 }
 
-const baseURL = 'http://localhost:8000/api'
-const withCredentials = true
-
-const api = () =>
-  axios.create({
+const api = () => {
+  return axios.create({
     baseURL,
-    withCredentials,
+    withCredentials: true,
     headers: { Authorization: `Bearer ${getToken()}` },
   })
+}
 
 export default api
