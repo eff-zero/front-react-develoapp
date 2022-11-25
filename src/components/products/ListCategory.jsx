@@ -1,7 +1,6 @@
 import useFetch from '@/hooks/useFetch'
 import { setNewData } from '@/redux/features/data/dataSlice'
 import { useDataState } from '@/redux/store'
-import { Col } from 'react-bootstrap'
 import { Category } from '..'
 
 const ListCategory = () => {
@@ -12,9 +11,14 @@ const ListCategory = () => {
 
   return (
     <>
-      {activateCategories.map((category) => (
-        <Category key={category.id} category={category} />
-      ))}
+      {error ? (
+        <>No se puedieron obtener los productos</>
+      ) : (
+        activateCategories.map((category) => (
+          <Category key={category.id} category={category} />
+        ))
+      )}
+      {}
     </>
   )
 }

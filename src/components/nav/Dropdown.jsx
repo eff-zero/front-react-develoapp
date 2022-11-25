@@ -1,5 +1,6 @@
 import { doLogoutClient } from '@/redux/features/auth/authSlice'
 import { openModal } from '@/redux/features/modal/modalSlice'
+import { openProductModal } from '@/redux/features/product/productSlice'
 import { useAuthState } from '@/redux/store'
 import { HOME, LOGIN } from '@/routes'
 import { logout } from '@/services/loginServices'
@@ -35,6 +36,15 @@ const Dropdown = () => {
     )
   }
 
+  // Abre el modal para crear un producto
+  const handleCreateProduct = () => {
+    dispatch(
+      openProductModal({
+        title: 'Creando producto',
+      }),
+    )
+  }
+
   if (!isAuth) {
     return (
       <Link to={LOGIN}>
@@ -46,9 +56,14 @@ const Dropdown = () => {
   return (
     <NavDropdown title={title} id='nav-dropdown' className='btn btn-dark'>
       {isAdmin && (
-        <NavDropdown.Item onClick={handleOpenToCreate}>
-          Crear categoria
-        </NavDropdown.Item>
+        <>
+          <NavDropdown.Item onClick={handleOpenToCreate}>
+            Crear categoria
+          </NavDropdown.Item>
+          <NavDropdown.Item onClick={handleCreateProduct}>
+            Crear producto
+          </NavDropdown.Item>
+        </>
       )}
       {/* <NavDropdown.Divider /> */}
       <NavDropdown.Item eventKey='4.1' onClick={handleLogout}>

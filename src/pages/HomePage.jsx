@@ -1,5 +1,5 @@
 import PageWithNavbar from '@/template/PageWithNavbar'
-import { Cart, ListCategory } from '@/components'
+import { Cart, ListCategory, ProductModal } from '@/components'
 import { Container, Row, Col } from 'react-bootstrap'
 
 const HomePage = () => {
@@ -10,6 +10,7 @@ const HomePage = () => {
           <ListCategory />
         </Row>
         <Cart />
+        <ProductModal />
       </Container>
     </PageWithNavbar>
   )

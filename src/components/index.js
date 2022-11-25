@@ -3,6 +3,8 @@ export { default as Cart } from './cart/Cart';
 export { default as CartItem } from './cart/CartItem';
 export { default as IconCart } from './cart/IconCart';
 export { default as CategoryForm } from './forms/CategoryForm';
+export { default as ProductForm } from './forms/product/ProductForm';
+export { default as ProductModal } from './forms/product/ProductModal';
 export { default as CustomModal } from './modal/CustomModal';
 export { default as Dropdown } from './nav/Dropdown';
 export { default as Navbar } from './nav/Navbar';

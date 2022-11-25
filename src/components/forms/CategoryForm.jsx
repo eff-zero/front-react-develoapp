@@ -18,7 +18,6 @@ const CategoryForm = () => {
   const { form, setForm, handleChange } = useForm(initialState)
 
   const { info } = useModalState() // Informacion llega por medio del modalSlice
-  console.log(info)
   // const { name, description, state, id } = info
 
   // const actualState = state === 1 ? 'activo' : 'inactivo'
