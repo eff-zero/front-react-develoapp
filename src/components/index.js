@@ -1,4 +1,6 @@
 export { default as ErrorText } from './ErrorText';
+export { default as Cart } from './cart/Cart';
+export { default as IconCart } from './cart/IconCart';
 export { default as CategoryForm } from './forms/CategoryForm';
 export { default as CustomModal } from './modal/CustomModal';
 export { default as Dropdown } from './nav/Dropdown';

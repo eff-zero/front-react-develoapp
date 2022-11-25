@@ -1,14 +1,9 @@
 import { closeModal } from '@/redux/features/modal/modalSlice'
 import { useModalState } from '@/redux/store'
-import { Modal, Button } from 'react-bootstrap'
+import { Modal } from 'react-bootstrap'
 import { useDispatch } from 'react-redux'
 
-const CustomModal = ({ children, handleEdit }) => {
-  const { show, title } = useModalState()
-  const dispatch = useDispatch()
-
-  const handleClose = () => dispatch(closeModal())
-
+const CustomModal = ({ children, show, title, handleClose }) => {
   return (
     <Modal show={show} onHide={handleClose} centered>
       <Modal.Header closeButton>

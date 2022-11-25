@@ -6,6 +6,7 @@ import { logout } from '@/services/loginServices'
 import { Container, Button } from 'react-bootstrap'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { Cart, IconCart } from '..'
 import Dropdown from './Dropdown'
 
 const Navbar = () => {
@@ -23,11 +24,10 @@ const Navbar = () => {
 
         <h4 className='d-none d-md-block text-white fw-bold'>DevelopApp</h4>
 
-        {/* <Button variant='dark' className='fw-semibold' onClick={handleLogout}>
-          Logout
-        </Button> */}
-
-        <Dropdown />
+        <div className='d-flex flex-column align-items-center gap-2'>
+          <Dropdown />
+          <IconCart />
+        </div>
       </Container>
     </nav>
   )

@@ -1,5 +1,6 @@
 import { useGetRole } from '@/helpers'
-import { openModal } from '@/redux/features/modal/modalSlice'
+import { openModal, closeModal } from '@/redux/features/modal/modalSlice'
+import { useModalState } from '@/redux/store'
 import { Container, Button, Col } from 'react-bootstrap'
 import { useDispatch } from 'react-redux'
 import { CategoryForm, CustomModal, Product } from '..'
@@ -11,6 +12,7 @@ const styles = {
 
 const Category = ({ category }) => {
   const { id, name, description, products } = category
+  const { show, title } = useModalState()
   const dispatch = useDispatch()
 
   const activeProducts = products.filter((product) => product.state === 1)
@@ -22,6 +24,8 @@ const Category = ({ category }) => {
         info: { id, name, description },
       }),
     )
+
+  const handleClose = () => dispatch(closeModal())
 
   const rol = useGetRole()
   const isAdmin = rol === 1
@@ -59,7 +63,7 @@ const Category = ({ category }) => {
         </Container>
       </Col>
 
-      <CustomModal>
+      <CustomModal show={show} title={title} handleClose={handleClose}>
         <CategoryForm />
       </CustomModal>
     </>

@@ -1,5 +1,5 @@
 import PageWithNavbar from '@/template/PageWithNavbar'
-import { ListCategory } from '@/components'
+import { Cart, ListCategory } from '@/components'
 import { Container, Row, Col } from 'react-bootstrap'
 
 const HomePage = () => {
@@ -9,6 +9,7 @@ const HomePage = () => {
         <Row className='row-cols-sm-1 row-cols-md-2'>
           <ListCategory />
         </Row>
+        <Cart />
       </Container>
     </PageWithNavbar>
   )
