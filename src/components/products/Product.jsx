@@ -1,7 +1,11 @@
 import logoJs from '@/assets/logo-js.png'
+import { addToCart } from '@/redux/features/cart/cartSlice'
 import { Card, Button } from 'react-bootstrap'
+import { useDispatch } from 'react-redux'
 
 const Product = ({ product }) => {
+  const dispatch = useDispatch()
+
   let { name, description, price } = product
   description = description.split('|')
 
@@ -14,7 +18,7 @@ const Product = ({ product }) => {
         <Card.Text>
           <span className='text-success'> $ {price.toLocaleString()} </span>
         </Card.Text>
-        <Button variant='primary'>Añadir al carrito</Button>
+        <Button variant='primary' onClick={() => dispatch(addToCart(product))}>Añadir al carrito</Button>
       </Card.Body>
     </Card>
   )

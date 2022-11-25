@@ -1,8 +1,10 @@
 import cartIcon from '@/assets/shopping-cart_icon.png'
 import { openCart } from '@/redux/features/cart/cartSlice'
+import { useCartState } from '@/redux/store'
 import { useDispatch } from 'react-redux'
 
 const IconCart = () => {
+  const { cart } = useCartState()
   const dispatch = useDispatch()
   const handleOpenCart = () => dispatch(openCart())
 
@@ -15,7 +17,7 @@ const IconCart = () => {
         className='user-select'
         onClick={handleOpenCart}
       />
-      {2}
+      {cart.length}
     </div>
   )
 }
