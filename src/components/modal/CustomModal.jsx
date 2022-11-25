@@ -3,7 +3,7 @@ import { useModalState } from '@/redux/store'
 import { Modal, Button } from 'react-bootstrap'
 import { useDispatch } from 'react-redux'
 
-const CustomModal = ({ children }) => {
+const CustomModal = ({ children, handleEdit }) => {
   const { show, title } = useModalState()
   const dispatch = useDispatch()
 
@@ -15,14 +15,6 @@ const CustomModal = ({ children }) => {
         <Modal.Title>{title}</Modal.Title>
       </Modal.Header>
       <Modal.Body>{children}</Modal.Body>
-      <Modal.Footer>
-        <Button variant='secondary' onClick={handleClose}>
-          Close
-        </Button>
-        <Button variant='primary' onClick={handleClose}>
-          Editar
-        </Button>
-      </Modal.Footer>
     </Modal>
   )
 }

@@ -1,4 +1,5 @@
 import { doLogoutClient } from '@/redux/features/auth/authSlice'
+import { openModal } from '@/redux/features/modal/modalSlice'
 import { useAuthState } from '@/redux/store'
 import { HOME, LOGIN } from '@/routes'
 import { logout } from '@/services/loginServices'
@@ -8,9 +9,11 @@ import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 
 const Dropdown = () => {
-  const { authData, isAuth } = useAuthState()
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const { authData, isAuth } = useAuthState()
+
+  const isAdmin = authData?.user?.rol_id === 1
   const title = authData?.user?.lastname
 
   const handleLogout = async () => {
@@ -23,6 +26,15 @@ const Dropdown = () => {
     }
   }
 
+  const handleOpenToCreate = () => {
+    dispatch(
+      openModal({
+        title: 'Creando categoria',
+        info: null,
+      }),
+    )
+  }
+
   if (!isAuth) {
     return (
       <Link to={LOGIN}>
@@ -33,6 +45,11 @@ const Dropdown = () => {
 
   return (
     <NavDropdown title={title} id='nav-dropdown' className='btn btn-dark'>
+      {isAdmin && (
+        <NavDropdown.Item onClick={handleOpenToCreate}>
+          Crear categoria
+        </NavDropdown.Item>
+      )}
       {/* <NavDropdown.Divider /> */}
       <NavDropdown.Item eventKey='4.1' onClick={handleLogout}>
         logout

@@ -10,13 +10,18 @@ const styles = {
 }
 
 const Category = ({ category }) => {
-  const { products } = category
+  const { id, name, description, products } = category
   const dispatch = useDispatch()
 
   const activeProducts = products.filter((product) => product.state === 1)
 
-  const handleOpenModal = () =>
-    dispatch(openModal(`Editar categoría: ${category.name}`))
+  const handleOpenToEdit = () =>
+    dispatch(
+      openModal({
+        title: 'Editando categoria',
+        info: { id, name, description },
+      }),
+    )
 
   const rol = useGetRole()
   const isAdmin = rol === 1
@@ -33,9 +38,15 @@ const Category = ({ category }) => {
             </div>
             <div>
               {isAdmin && (
-                <Button variant='dark' size='sm' onClick={handleOpenModal}>
-                  Editar Categoria
-                </Button>
+                <div className='d-flex gap-1'>
+                  <Button
+                    variant='primary'
+                    size='sm'
+                    onClick={handleOpenToEdit}
+                  >
+                    Editar Categoria
+                  </Button>
+                </div>
               )}
             </div>
           </Container>
@@ -49,7 +60,7 @@ const Category = ({ category }) => {
       </Col>
 
       <CustomModal>
-        <CategoryForm category={category} />
+        <CategoryForm />
       </CustomModal>
     </>
   )
