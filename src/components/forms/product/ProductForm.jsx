@@ -1,7 +1,11 @@
 import useForm from '@/hooks/useForm'
+import { setNewData } from '@/redux/features/data/dataSlice'
+import { closeProductModal } from '@/redux/features/product/productSlice'
 import { useDataState, useProductState } from '@/redux/store'
+import { productService } from '@/services'
 import { useEffect } from 'react'
-import { Container, FloatingLabel, Form } from 'react-bootstrap'
+import { Button, Container, FloatingLabel, Form } from 'react-bootstrap'
+import { useDispatch } from 'react-redux'
 
 const initialForm = {
   name: '',
@@ -12,6 +16,7 @@ const initialForm = {
 }
 
 const ProductForm = ({ categories }) => {
+  const dispatch = useDispatch()
   let data = null
 
   const { info } = useProductState()
@@ -26,10 +31,35 @@ const ProductForm = ({ categories }) => {
     info ? setForm(data) : setForm(initialForm)
   }, [])
 
+  const handleCreate = async (form) => {
+    try {
+      const { data } = await productService().create(form)
+      dispatch(setNewData(data))
+      dispatch(closeProductModal())
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  const handleUpdate = async (form) => {
+    try {
+      const { data } = await productService().update(form)
+      dispatch(setNewData(data))
+      dispatch(closeProductModal())
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  const handleSubmit = async (form) => {
+    !info ? await handleCreate(form) : await handleUpdate(form)
+  }
+
   return (
     <Container>
       <FloatingLabel label='Categoria' className='mb-4'>
-        <Form.Select value={form.category_id} onChange={handleChange}>
+        <Form.Select onChange={handleChange} name='category_id'>
+          <option value=""> Seleccionar categoria </option>
           {categories.map((categorie) => (
             <option key={categorie.id} value={categorie.id}>
               {categorie.name}
@@ -62,13 +92,16 @@ const ProductForm = ({ categories }) => {
         <Form.Control
           type='number'
           name='stock'
-          value={form.number}
+          value={form.stock}
           placeholder=' '
           onChange={handleChange}
         />
       </FloatingLabel>
 
-      <FloatingLabel label='Descripción' className='mb-3'>
+      <FloatingLabel
+        label="Descripción ( usar '|' para separar )"
+        className='mb-3'
+      >
         <Form.Control
           type='text'
           name='description'
@@ -79,11 +112,15 @@ const ProductForm = ({ categories }) => {
       </FloatingLabel>
 
       <FloatingLabel label='¿Mostrar producto?' className='mb-3'>
-        <Form.Select>
+        <Form.Select onChange={handleChange} name='state'>
           <option value='1'> Sí </option>
           <option value='0'> No </option>
         </Form.Select>
       </FloatingLabel>
+
+      <Button variant='primary' onClick={() => handleSubmit(form)}>
+        Enviar
+      </Button>
     </Container>
   )
 }

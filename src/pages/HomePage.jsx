@@ -6,7 +6,7 @@ const HomePage = () => {
   return (
     <PageWithNavbar>
       <Container>
-        <Row className='row-cols-sm-1 row-cols-md-2'>
+        <Row>
           <ListCategory />
         </Row>
         <Cart />

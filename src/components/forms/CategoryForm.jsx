@@ -94,7 +94,7 @@ const CategoryForm = () => {
       </FloatingLabel>
 
       <Button variant='primary' onClick={() => handleSubmit(form)}>
-        Boton
+        Enviar
       </Button>
     </>
   )

@@ -32,36 +32,30 @@ const Category = ({ category }) => {
 
   return (
     <>
-      <Col>
-        <Container className='mb-3 p-3 border shadow-sm'>
-          <Container className={styles.header_category}>
-            <div>
-              <h4 className='text-uppercase'>
-                categoria: <span className='text-muted'> {category.name} </span>{' '}
-              </h4>
-            </div>
-            <div>
-              {isAdmin && (
-                <div className='d-flex gap-1'>
-                  <Button
-                    variant='primary'
-                    size='sm'
-                    onClick={handleOpenToEdit}
-                  >
-                    Editar Categoria
-                  </Button>
-                </div>
-              )}
-            </div>
-          </Container>
-
-          <Container className='d-flex justify-content-evenly'>
-            {activeProducts.map((product) => (
-              <Product key={product.id} product={product} />
-            ))}
-          </Container>
+      <Container className='mb-3 p-3 border shadow-sm'>
+        <Container className={styles.header_category}>
+          <div>
+            <h4 className='text-uppercase'>
+              categoria: <span className='text-muted'> {category.name} </span>{' '}
+            </h4>
+          </div>
+          <div>
+            {isAdmin && (
+              <div className='d-flex gap-1'>
+                <Button variant='primary' size='sm' onClick={handleOpenToEdit}>
+                  Editar Categoria
+                </Button>
+              </div>
+            )}
+          </div>
         </Container>
-      </Col>
+
+        <Container className='d-flex flex-wrap gap-3'>
+          {activeProducts.map((product) => (
+            <Product key={product.id} product={product} />
+          ))}
+        </Container>
+      </Container>
 
       <CustomModal show={show} title={title} handleClose={handleClose}>
         <CategoryForm />

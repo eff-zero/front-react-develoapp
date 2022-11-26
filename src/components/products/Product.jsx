@@ -20,7 +20,7 @@ const Product = ({ product }) => {
 
   return (
     <Card>
-      <Card.Img src={logoJs} variant='top' style={{ height: '15rem' }} />
+      <Card.Img src={logoJs} variant='top' style={{ height: '10rem', objectFit: 'fill' }} />
       <Card.Body>
         <Card.Title>{name}</Card.Title>
         <Caracteristicas description={description} />
